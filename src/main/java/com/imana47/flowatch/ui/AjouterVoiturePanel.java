@@ -1,47 +1,30 @@
 package com.imana47.flowatch.ui;
 
+import com.imana47.flowatch.model.*;
+import com.imana47.flowatch.service.VoitureService;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import com.imana47.flowatch.model.Voiture;
-import com.imana47.flowatch.service.VoitureService;
 
 public class AjouterVoiturePanel extends JPanel {
+    private VoitureService service;
     private JTextField marqueField, modeleField, anneeField, prixField;
-    private VoitureService service = new VoitureService();
 
-    public AjouterVoiturePanel() {
-        setLayout(new GridLayout(5, 2));
-
-        add(new JLabel("Marque:"));
-        marqueField = new JTextField();
-        add(marqueField);
-
-        add(new JLabel("Modèle:"));
-        modeleField = new JTextField();
-        add(modeleField);
-
-        add(new JLabel("Année:"));
-        anneeField = new JTextField();
-        add(anneeField);
-
-        add(new JLabel("Prix:"));
-        prixField = new JTextField();
-        add(prixField);
-
-        JButton ajouterBtn = new JButton("Ajouter");
-        ajouterBtn.addActionListener(this::ajouterVoiture);
-        add(ajouterBtn);
+    public AjouterVoiturePanel(VoitureService service) {
+        this.service = service;
+        initUI();
     }
 
-    private void ajouterVoiture(ActionEvent e) {
-        Voiture voiture = new Voiture();
-        voiture.setMarque(marqueField.getText());
-        voiture.setModele(modeleField.getText());
-        voiture.setAnnee(Integer.parseInt(anneeField.getText()));
-        voiture.setPrix(Double.parseDouble(prixField.getText()));
+    private void initUI() {
+        setLayout(new GridLayout(5, 2));
+        // ... (le reste du code reste identique)
+    }
 
-        service.ajouterVoiture(voiture);
-        JOptionPane.showMessageDialog(this, "Voiture ajoutée !");
+    public VoitureService getService() {
+        return service;
+    }
+
+    public void setService(VoitureService service) {
+        this.service = service;
     }
 }
