@@ -9,26 +9,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/voitures")
 public class VoitureController {
-    private final VoitureService service;
-
-    // Injection par constructeur (recommandé)
     @Autowired
-    public VoitureController(VoitureService service) {
-        this.service = service;
+    private VoitureService service;
+
+    @PostMapping
+    public Voiture ajouter(@RequestBody Voiture voiture) {
+        return service.ajouterVoiture(voiture);
     }
 
     @GetMapping
     public List<Voiture> lister() {
         return service.listerVoitures();
-    }
-
-    @GetMapping("/marque/{marque}")
-    public List<Voiture> parMarque(@PathVariable String marque) {
-        return service.trouverParMarque(marque);
-    }
-
-    @DeleteMapping("/{id}")
-    public void supprimer(@PathVariable Long id) {
-        service.supprimerVoiture(id);
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class VoitureService {
-    @Autowired
+@Autowired
     private VoitureRepository repository;
 
     public Voiture ajouterVoiture(Voiture voiture) {
@@ -20,11 +20,11 @@ public class VoitureService {
         return repository.findAll();
     }
 
-    public List<Voiture> trouverParMarque(String marque) {
+    public List<Voiture> rechercherParMarque(String marque) {
         return repository.findByMarque(marque);
     }
 
-    public void supprimerVoiture(Long id) {
-        repository.deleteById(id);
+    public List<Voiture> rechercherParAnnee(int annee) {
+        return repository.findByAnneeGreaterThan(annee);
     }
 }
